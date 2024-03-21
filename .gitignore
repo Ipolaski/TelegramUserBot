@@ -2,6 +2,6 @@
 # Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
 ################################################################################
 
-/TelegramUserBotTest/bin/Debug/net8.0
-/.vs/TelegramUserBotTest
-/TelegramUserBotTest
+.vs/
+*/bin/
+*/obj/
