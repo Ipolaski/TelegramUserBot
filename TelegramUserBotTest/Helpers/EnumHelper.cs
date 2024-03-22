@@ -11,10 +11,10 @@ namespace TelegramUserBotTest.Helpers
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
-            var attributes = field.GetCustomAttributes( typeof( DescriptionAttribute ), false );
+            var attributes = field.GetCustomAttributes( typeof( DisplayAttribute ), false );
             return attributes.Length == 0
                 ? enumValue.ToString()
-                : ((DescriptionAttribute)attributes[0]).Description;
+                : ((DisplayAttribute)attributes[0]).Name;
         }
 
         internal static string Name( this Navigation enumValue )
