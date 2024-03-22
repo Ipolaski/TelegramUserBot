@@ -7,7 +7,7 @@ namespace TelegramUserBotTest.Helpers
 {
     public static class EnumHelper
     {
-        internal static string Description( this Battle enumValue )
+        internal static string Name( this Battle enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
@@ -17,7 +17,7 @@ namespace TelegramUserBotTest.Helpers
                 : ((DescriptionAttribute)attributes[0]).Description;
         }
 
-        internal static string Description( this Navigation enumValue )
+        internal static string Name( this Navigation enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
@@ -27,7 +27,7 @@ namespace TelegramUserBotTest.Helpers
                 : ((DisplayAttribute)attributes[0]).Name;
         }
 
-        internal static string Description( this Army enumValue )
+        internal static string Name( this Army enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
@@ -37,7 +37,7 @@ namespace TelegramUserBotTest.Helpers
                 : ((DisplayAttribute)attributes[0]).Name;
         }
 
-        internal static string Description( this Building enumValue )
+        internal static string Name( this Building enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
@@ -47,7 +47,7 @@ namespace TelegramUserBotTest.Helpers
                 : ((DisplayAttribute)attributes[0]).Name;
         }
 
-        internal static string Description( this LivePower enumValue )
+        internal static string Name( this LivePower enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
