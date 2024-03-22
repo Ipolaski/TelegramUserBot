@@ -1,4 +1,4 @@
-﻿namespace TelegramUserBotTest.Enum.Resources
+﻿namespace TelegramUserBotTest.Helpers.Enum.Resources
 {
     enum LivePower
     {

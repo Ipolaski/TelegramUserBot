@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TelegramUserBotTest.Enum.Resources
+namespace TelegramUserBotTest.Helpers.Enum.Resources
 {
     enum Army
     {
-        [Display( Name = "🗡️ Мечники" )]
+        [Display(Name = "🗡️ Мечники")]
         Мечники = 0,
 
-        [Display( Name = "🏇🏻 Всадники" )]
+        [Display(Name = "🏇🏻 Всадники")]
         Всадники = 1,
 
-        [Display( Name = "🍢 Копейщики" )]
+        [Display(Name = "🍢 Копейщики")]
         Копейщики = 2,
     }
 }

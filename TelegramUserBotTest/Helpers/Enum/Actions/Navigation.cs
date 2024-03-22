@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TelegramUserBotTest.Enum.Actions
+namespace TelegramUserBotTest.Helpers.Enum.Actions
 {
     enum Navigation
     {

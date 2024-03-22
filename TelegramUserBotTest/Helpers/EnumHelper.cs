@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using TelegramUserBotTest.Enum.Actions;
-using TelegramUserBotTest.Enum.Resources;
+using TelegramUserBotTest.Helpers.Enum.Actions;
+using TelegramUserBotTest.Helpers.Enum.Resources;
 
 namespace TelegramUserBotTest.Helpers
 {
@@ -27,40 +21,40 @@ namespace TelegramUserBotTest.Helpers
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
-            var attributes = field.GetCustomAttributes( typeof( DescriptionAttribute ), false );
+            var attributes = field.GetCustomAttributes( typeof( DisplayAttribute ), false );
             return attributes.Length == 0
                 ? enumValue.ToString()
-                : ((DescriptionAttribute)attributes[0]).Description;
+                : ((DisplayAttribute)attributes[0]).Name;
         }
 
         internal static string Description( this Army enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
-            var attributes = field.GetCustomAttributes( typeof( DescriptionAttribute ), false );
+            var attributes = field.GetCustomAttributes( typeof( DisplayAttribute ), false );
             return attributes.Length == 0
                 ? enumValue.ToString()
-                : ((DescriptionAttribute)attributes[0]).Description;
+                : ((DisplayAttribute)attributes[0]).Name;
         }
 
         internal static string Description( this Building enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
-            var attributes = field.GetCustomAttributes( typeof( DescriptionAttribute ), false );
+            var attributes = field.GetCustomAttributes( typeof( DisplayAttribute ), false );
             return attributes.Length == 0
                 ? enumValue.ToString()
-                : ((DescriptionAttribute)attributes[0]).Description;
+                : ((DisplayAttribute)attributes[0]).Name;
         }
 
         internal static string Description( this LivePower enumValue )
         {
             var enumType = enumValue.GetType();
             var field = enumType.GetField( enumValue.ToString() );
-            var attributes = field.GetCustomAttributes( typeof( DescriptionAttribute ), false );
+            var attributes = field.GetCustomAttributes( typeof( DisplayAttribute ), false );
             return attributes.Length == 0
                 ? enumValue.ToString()
-                : ((DescriptionAttribute)attributes[0]).Description;
+                : ((DisplayAttribute)attributes[0]).Name;
         }
     }
 }
