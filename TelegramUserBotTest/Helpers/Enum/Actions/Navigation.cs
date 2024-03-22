@@ -6,5 +6,5 @@ namespace TelegramUserBotTest.Helpers.Enum.Actions
     {
         [Display(Name = "⬆️ Наверх")]
         ГлавноеМеню
-    }
+    }    
 }

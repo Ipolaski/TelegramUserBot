@@ -17,6 +17,9 @@ namespace TelegramUserBotTest.Helpers.Enum.Actions
         Атаковать = 3,
 
         [Display(Name = "⚔️ Бой")]
-        Бой = 4
+        Бой = 4,
+
+        [Display( Name = "🛡 Армия" )]
+        Армия
     }
 }
