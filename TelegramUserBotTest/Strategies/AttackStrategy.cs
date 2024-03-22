@@ -14,7 +14,7 @@ namespace TelegramUserBotTest.Strategies
         //private User _user;
         private InputPeer? _peer;
         private Timer? _timerAttack;
-        //private bool _weaponAdd = false;
+        private bool _weaponAdd = false;
 
         public AttackStrategy( Client client, long bastionSiegeId = 0 )
         {
@@ -57,7 +57,7 @@ namespace TelegramUserBotTest.Strategies
         private async Task ClientOnUpdate( UpdatesBase updates )
         {
             foreach (UpdateNewMessage update in updates.UpdateList.Where( upd => upd.GetType().Name == "UpdateNewMessage" ))
-                if (update.message.Peer.ID == _bastionSiegeId && update.message.From == null)
+                if (update.message.Peer.ID == _bastionSiegeId && (update.message.From == null || update.message.From == _bastionSiegeId))
                     await HandleNewUpdate( update.message as Message );
         }
 
@@ -68,10 +68,10 @@ namespace TelegramUserBotTest.Strategies
 
         private async Task GetCommand( Message message )
         {
-            var matchOperationNumber = 0;
+            int? matchOperationNumber = _weaponAdd ? 3 : null;
 
             var battleResponse = Enum.GetNames( typeof( BattleResponces ) ).ToList();
-            for (int i = 0; i < battleResponse.Count && matchOperationNumber == 0; i++)
+            for (int i = 0; i < battleResponse.Count && matchOperationNumber == null; i++)
                 if (message.message.Contains( battleResponse[i] ))
                     matchOperationNumber = i;
 
@@ -125,7 +125,7 @@ namespace TelegramUserBotTest.Strategies
         {
             await ResetAttack();
 
-            //_weaponAdd = true;
+            _weaponAdd = true;
 
             await _client.SendMessageAsync( _peer, Navigation.ГлавноеМеню.Name() );
             Thread.Sleep( 4000 );
