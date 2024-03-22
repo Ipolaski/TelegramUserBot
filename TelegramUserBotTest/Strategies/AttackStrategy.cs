@@ -4,9 +4,9 @@ using TelegramUserBotTest.Helpers.Enum.Resources;
 using TL;
 using WTelegram;
 
-namespace TelegramUserBotTest.Servcices
+namespace TelegramUserBotTest.Strategies
 {
-    internal class TelegramClientService
+    internal class AttackStrategy
     {
         private readonly long _bastionSiegeId;
         private readonly Client _client;
@@ -15,10 +15,10 @@ namespace TelegramUserBotTest.Servcices
         private Timer? _timerAttack;
         private bool _weaponAdd = false;
 
-        public TelegramClientService(long bastionSiegeId, Func<string, string> configProvier)
+        public AttackStrategy(Client client, long bastionSiegeId)
         {
+            _client = client;
             _bastionSiegeId = bastionSiegeId;
-            _client = new Client(configProvier);
             _user = new User();
         }
 
@@ -37,7 +37,9 @@ namespace TelegramUserBotTest.Servcices
             {
                 await _client.SendMessageAsync(_peer, "/home");
                 Thread.Sleep(4000);
-                await _client.SendMessageAsync(_peer, Battle.Гарнизон.Description());
+                await _client.SendMessageAsync(_peer, Battle.Гарнизон.Name());
+                Thread.Sleep(4000);
+                await _client.SendMessageAsync(_peer, Battle.Разведка.Name());
             }, null, 0, 60000);
         }
 
@@ -64,23 +66,22 @@ namespace TelegramUserBotTest.Servcices
 
         private async Task GetCommand(Message message)
         {
-            if (message.message.Contains(Battle.Гарнизон.Description()) && !_weaponAdd)
+            if (message.message.Contains(Battle.Разведка.Name()) && message.message.Contains("Цель:"))
             {
-                await _client.SendMessageAsync(_peer, Battle.Разведка.Description());
+                await _client.SendMessageAsync(_peer, Battle.Атаковать.Name());
             }
-            else if (message.message.Contains(Battle.Разведка.Description()) && message.message.Contains("Цель:"))
+            else if (message.message.Contains(Battle.Разведка.Name()) && message.message.Contains("Искать:"))
             {
-                await _client.SendMessageAsync(_peer, Battle.Атаковать.Description());
-            }
-            else if (message.message.Contains(Battle.Разведка.Description()) && message.message.Contains("Искать:"))
-            {
-                await _client.SendMessageAsync(_peer, Battle.Искать.Description());
+                await _client.SendMessageAsync(_peer, Battle.Искать.Name());
             }
             else if (message.message.Contains("Нельзя нападать так часто."))
             {
                 await ResetAttack();
             }
-
+            else if (message.message.Contains("➕ Нанять") && _weaponAdd)
+            {
+                await AddArmy(message.message);
+            }
 
             else if (message.message.Contains("Ты победил!"))
             {
@@ -96,34 +97,15 @@ namespace TelegramUserBotTest.Servcices
                 await ResetAttack();
 
                 _weaponAdd = true;
-
+                
                 await _client.SendMessageAsync(_peer, "/home");
                 Thread.Sleep(4000);
 
-                await _client.SendMessageAsync(_peer, Battle.Гарнизон.Description());
+                await _client.SendMessageAsync(_peer, Battle.Гарнизон.Name());
                 Thread.Sleep(4000);
 
                 await _client.SendMessageAsync(_peer, "🛡 Армия");
-                Thread.Sleep(4000);
-
-                await _client.SendMessageAsync(_peer, Army.Мечники.Description());
-                Thread.Sleep(4000);
-                await _client.SendMessageAsync(_peer, "10");
-                Thread.Sleep(4000);
-
-                await _client.SendMessageAsync(_peer, Army.Копейщики.Description());
-                Thread.Sleep(4000);
-                await _client.SendMessageAsync(_peer, "10");
-                Thread.Sleep(4000);
-
-                await _client.SendMessageAsync(_peer, Army.Копейщики.Description());
-                Thread.Sleep(4000);
-                await _client.SendMessageAsync(_peer, "10");
-                Thread.Sleep(4000);
-
-                await _client.SendMessageAsync(_peer, "/home");
-
-                _weaponAdd = false;
+                Thread.Sleep(4000);       
             }
             else if (message.message.Contains("Ты проиграл..."))
             {
@@ -136,6 +118,31 @@ namespace TelegramUserBotTest.Servcices
             }
 
 
+        }
+
+        private async Task AddArmy(string message)
+        {
+            //HireArmyHelper.GetCountHireArmy(message);
+            _weaponAdd = false;
+            
+            await _client.SendMessageAsync(_peer, Army.Мечники.Name());
+            Thread.Sleep(4000);
+            await _client.SendMessageAsync(_peer, "15");
+            Thread.Sleep(4000);
+
+            await _client.SendMessageAsync(_peer, Army.Копейщики.Name());
+            Thread.Sleep(4000);
+            await _client.SendMessageAsync(_peer, "15");
+            Thread.Sleep(4000);
+
+            await _client.SendMessageAsync(_peer, Army.Всадники.Name());
+            Thread.Sleep(4000);
+            await _client.SendMessageAsync(_peer, "14");
+            Thread.Sleep(4000);
+
+            await _client.SendMessageAsync(_peer, "/home");
+
+            
         }
 
         private async Task ResetAttack()
@@ -151,7 +158,9 @@ namespace TelegramUserBotTest.Servcices
             {
                 await _client.SendMessageAsync(_peer, "/home");
                 Thread.Sleep(4000);
-                await _client.SendMessageAsync(_peer, Battle.Гарнизон.Description());
+                await _client.SendMessageAsync(_peer, Battle.Гарнизон.Name());
+                Thread.Sleep(4000);
+                await _client.SendMessageAsync(_peer, Battle.Разведка.Name());
             }, null, period, period);
         }
 

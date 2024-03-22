@@ -1,8 +1,11 @@
-﻿using TelegramUserBotTest.Servcices;
+﻿using TelegramUserBotTest.Strategies;
 
 const int bastionSiegeId = 252148344;
 
-var tgclient = new TelegramClientService(bastionSiegeId, Config!);
+using var tgClient = new WTelegram.Client(Config);
+var myClient = await tgClient.LoginUserIfNeeded();
+
+var tgclient = new AttackStrategy(tgClient, bastionSiegeId);
 await tgclient.Start();
 
 Console.WriteLine("Бот запущен");
@@ -32,7 +35,7 @@ string? Config(string arg)
         case "api_hash":
             return "6569b5c46c19dcb3c104cebf504027f8";
         case "phone_number":
-            return "+79871964024";
+            return "+-----";
     }
     return null;
 }

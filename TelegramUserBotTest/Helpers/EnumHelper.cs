@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using TelegramUserBotTest.Enum.Resources;
 using TelegramUserBotTest.Helpers.Enum.Actions;
 using TelegramUserBotTest.Helpers.Enum.Resources;
 
