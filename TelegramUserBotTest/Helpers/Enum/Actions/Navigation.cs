@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TelegramUserBotTest.Actions
+namespace TelegramUserBotTest.Enum.Actions
 {
     enum Navigation
     {
-        [Display(Name = "⬆️ Наверх" )]
+        [Display(Name = "⬆️ Наверх")]
         ГлавноеМеню
     }
 }
