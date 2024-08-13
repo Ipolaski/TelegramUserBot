@@ -5,6 +5,9 @@ const int bastionSiegeId = 252148344;
 using var tgClient = new WTelegram.Client(Config);
 var myClient = await tgClient.LoginUserIfNeeded();
 
+//var prSt = new ProductionStartegy(tgClient, bastionSiegeId);
+//await prSt.Start();
+
 var tgclient = new AttackStrategy(tgClient, bastionSiegeId);
 await tgclient.Start();
 
@@ -35,7 +38,7 @@ string? Config(string arg)
         case "api_hash":
             return "6569b5c46c19dcb3c104cebf504027f8";
         case "phone_number":
-            return "+-----";
+            return "+79871964024";
     }
     return null;
 }

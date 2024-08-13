@@ -19,18 +19,18 @@ namespace TelegramUserBotTest.Helpers
             var residens = message[(message.IndexOf("Жители: ") + "Жители: ".Length)..message.IndexOf("👨🏻‍🌾")];
             var horse = message[(message.IndexOf("Лошади: ") + "Лошади: ".Length)..message.IndexOf("🐴")];
 
-            hireArmy.BarracksOccupiedPlaces = Convert.ToInt32(barracks[0..barracks.IndexOf("/")]);
-            hireArmy.BarracksAllPlaces = Convert.ToInt32(barracks[(barracks.IndexOf("/") + 1)..barracks.Length]);
+            hireArmy.BarracksOccupiedPlaces = Convert.ToInt32(barracks[0..barracks.IndexOf("/")].Replace(",", ""));
+            hireArmy.BarracksAllPlaces = Convert.ToInt32(barracks[(barracks.IndexOf("/") + 1)..barracks.Length].Replace(",", ""));
 
-            hireArmy.Swordsmen = Convert.ToInt32(swordsman);
-            hireArmy.Horsemen = Convert.ToInt32(horseman);
-            hireArmy.Spearmen = Convert.ToInt32(spearman);
+            hireArmy.Swordsmen = Convert.ToInt32(swordsman.Replace(",", ""));
+            hireArmy.Horsemen = Convert.ToInt32(horseman.Replace(",", ""));
+            hireArmy.Spearmen = Convert.ToInt32(spearman.Replace(",", ""));
 
-            hireArmy.Gold = Convert.ToInt32(gold);
-            hireArmy.Wood = Convert.ToInt32(wood);
-            hireArmy.Provisions = Convert.ToInt32(provisions);
-            hireArmy.Residents = Convert.ToInt32(residens);
-            hireArmy.Horse = Convert.ToInt32(horse);
+            hireArmy.Gold = Convert.ToInt32(gold.Replace(",", ""));
+            hireArmy.Wood = Convert.ToInt32(wood.Replace(",", ""));
+            hireArmy.Provisions = Convert.ToInt32(provisions.Replace(",", ""));
+            hireArmy.Residents = Convert.ToInt32(residens.Replace(",", ""));
+            hireArmy.Horse = Convert.ToInt32(horse.Replace(",", ""));
 
             return hireArmy;
         }
